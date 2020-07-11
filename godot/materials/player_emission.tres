@@ -1,0 +1,122 @@
+[gd_resource type="ShaderMaterial" load_steps=14 format=2]
+
+[ext_resource path="res://sprites/Player.png" type="Texture" id=1]
+[ext_resource path="res://sprites/Player_Emission_Attack.png" type="Texture" id=2]
+[ext_resource path="res://sprites/Player_Emission_Necklace.png" type="Texture" id=3]
+
+[sub_resource type="VisualShaderNodeColorUniform" id=1]
+uniform_name = "attack_color"
+
+[sub_resource type="VisualShaderNodeVectorOp" id=2]
+
+[sub_resource type="VisualShaderNodeVectorOp" id=3]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id=4]
+texture = ExtResource( 1 )
+
+[sub_resource type="VisualShaderNodeVectorOp" id=5]
+
+[sub_resource type="VisualShaderNodeTexture" id=6]
+texture = ExtResource( 3 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=7]
+uniform_name = "necklace_color"
+
+[sub_resource type="VisualShaderNodeVectorOp" id=8]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id=9]
+texture = ExtResource( 2 )
+
+[sub_resource type="VisualShader" id=10]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_2;
+uniform sampler2D tex_frg_6;
+uniform vec4 necklace_color : hint_color;
+uniform sampler2D tex_frg_9;
+uniform vec4 attack_color : hint_color;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, UV.xy);
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Texture:6
+	vec4 tex_frg_6_read = texture(tex_frg_6, UV.xy);
+	vec3 n_out6p0 = tex_frg_6_read.rgb;
+	float n_out6p1 = tex_frg_6_read.a;
+
+// ColorUniform:7
+	vec3 n_out7p0 = necklace_color.rgb;
+	float n_out7p1 = necklace_color.a;
+
+// VectorOp:8
+	vec3 n_out8p0 = n_out6p0 * n_out7p0;
+
+// VectorOp:5
+	vec3 n_out5p0 = n_out2p0 + n_out8p0;
+
+// Texture:9
+	vec4 tex_frg_9_read = texture(tex_frg_9, UV.xy);
+	vec3 n_out9p0 = tex_frg_9_read.rgb;
+	float n_out9p1 = tex_frg_9_read.a;
+
+// ColorUniform:11
+	vec3 n_out11p0 = attack_color.rgb;
+	float n_out11p1 = attack_color.a;
+
+// VectorOp:13
+	vec3 n_out13p0 = n_out9p0 * n_out11p0;
+
+// VectorOp:12
+	vec3 n_out12p0 = n_out5p0 + n_out13p0;
+
+// Output:0
+	COLOR.rgb = n_out12p0;
+	COLOR.a = n_out2p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -80, 135.262 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 1100, 280 )
+nodes/fragment/2/node = SubResource( 4 )
+nodes/fragment/2/position = Vector2( 200, 120 )
+nodes/fragment/5/node = SubResource( 5 )
+nodes/fragment/5/position = Vector2( 600, 300 )
+nodes/fragment/6/node = SubResource( 6 )
+nodes/fragment/6/position = Vector2( 200, 360 )
+nodes/fragment/7/node = SubResource( 7 )
+nodes/fragment/7/position = Vector2( 20, 360 )
+nodes/fragment/8/node = SubResource( 8 )
+nodes/fragment/8/position = Vector2( 420, 420 )
+nodes/fragment/9/node = SubResource( 9 )
+nodes/fragment/9/position = Vector2( 240, 620 )
+nodes/fragment/11/node = SubResource( 1 )
+nodes/fragment/11/position = Vector2( 20, 600 )
+nodes/fragment/12/node = SubResource( 2 )
+nodes/fragment/12/position = Vector2( 840, 340 )
+nodes/fragment/13/node = SubResource( 3 )
+nodes/fragment/13/position = Vector2( 600, 620 )
+nodes/fragment/connections = PoolIntArray( 2, 1, 0, 1, 2, 0, 5, 0, 7, 0, 8, 1, 6, 0, 8, 0, 8, 0, 5, 1, 5, 0, 12, 0, 9, 0, 13, 0, 11, 0, 13, 1, 13, 0, 12, 1, 12, 0, 0, 0 )
+
+[resource]
+shader = SubResource( 10 )
+shader_param/necklace_color = Color( 0.18, 3.5, 3.75, 1 )
+shader_param/attack_color = Color( 0.18, 3.5, 3.75, 1 )

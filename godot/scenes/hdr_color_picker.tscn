@@ -1,0 +1,205 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/hdr_color_picker.gd" type="Script" id=1]
+[ext_resource path="res://scenes/swatch.gd" type="Script" id=2]
+
+[node name="hdr_color_picker" type="Panel"]
+margin_right = 310.0
+margin_bottom = 500.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorPicker" type="ColorPicker" parent="VBoxContainer"]
+margin_right = 310.0
+margin_bottom = 412.0
+mouse_filter = 0
+edit_alpha = false
+presets_enabled = false
+presets_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="intensity_slider" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 416.0
+margin_right = 310.0
+margin_bottom = 440.0
+
+[node name="Label" type="Label" parent="VBoxContainer/intensity_slider"]
+margin_top = 5.0
+margin_right = 57.0
+margin_bottom = 19.0
+text = "Intensity"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/intensity_slider"]
+margin_left = 61.0
+margin_top = 4.0
+margin_right = 232.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -10.0
+max_value = 10.0
+step = 0.2
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/intensity_slider"]
+margin_left = 236.0
+margin_right = 310.0
+margin_bottom = 24.0
+min_value = -10.0
+max_value = 10.0
+step = 0.2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 444.0
+margin_right = 310.0
+margin_bottom = 492.0
+rect_min_size = Vector2( 0, 48 )
+custom_constants/separation = 0
+
+[node name="swatch" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+margin_right = 62.0
+margin_bottom = 48.0
+mouse_filter = 0
+size_flags_horizontal = 3
+expand = true
+script = ExtResource( 2 )
+value = -2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/swatch"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+text = "-2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="swatch2" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+margin_left = 62.0
+margin_right = 124.0
+margin_bottom = 48.0
+mouse_filter = 0
+size_flags_horizontal = 3
+expand = true
+script = ExtResource( 2 )
+value = -1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/swatch2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+text = "-1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="swatch3" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+margin_left = 124.0
+margin_right = 186.0
+margin_bottom = 48.0
+mouse_filter = 0
+size_flags_horizontal = 3
+expand = true
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/swatch3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="swatch4" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+margin_left = 186.0
+margin_right = 248.0
+margin_bottom = 48.0
+mouse_filter = 0
+size_flags_horizontal = 3
+expand = true
+script = ExtResource( 2 )
+value = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/swatch4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="swatch5" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+margin_left = 248.0
+margin_right = 310.0
+margin_bottom = 48.0
+mouse_filter = 0
+size_flags_horizontal = 3
+expand = true
+script = ExtResource( 2 )
+value = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/swatch5"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="color_changed" from="VBoxContainer/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
+[connection signal="value_changed" from="VBoxContainer/intensity_slider/HSlider" to="." method="set_intensity"]
+[connection signal="value_changed" from="VBoxContainer/intensity_slider/SpinBox" to="." method="set_intensity"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/swatch" to="VBoxContainer/HBoxContainer/swatch" method="_on_swatch_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/swatch2" to="VBoxContainer/HBoxContainer/swatch2" method="_on_swatch_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/swatch3" to="VBoxContainer/HBoxContainer/swatch3" method="_on_swatch_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/swatch4" to="VBoxContainer/HBoxContainer/swatch4" method="_on_swatch_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/swatch5" to="VBoxContainer/HBoxContainer/swatch5" method="_on_swatch_gui_input"]
